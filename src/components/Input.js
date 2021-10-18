@@ -1,25 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import './Input.css';
 import { Icon } from "@iconify/react"
 import { useHistory } from 'react-router-dom';
 
 const Input = (props) => {
+    const [inputValue, setInputValue] = useState();
     const history = useHistory();
-    const homeHandler = (e) => {
+
+    const inputHandler = (e) => {
+        e.persist();
+        setInputValue(e.target.value, (prevInput) => {
+            return {...prevInput, }
+        });
+        console.log(inputValue);
+    }
+    
+      const homeHandler = (e) => {
         if(props.id === "email") console.log("Logar email?");
         if(props.id === "facebook") console.log("Logar facebook?");
         if(props.id === "Enviar") {
-            console.log("Cadastrando...");
-            history.push("/");
+            props.clickHandler();
         }
     }
     return (
     <div className="bg">
-        {props.type === "type"
+        {props.type === "text" || props.type ===  "password" || props.type ===  "email"
         ?
         <>
         {typeof props.icon !== "undefined" && <label htmlFor={props.id}><Icon icon={props.icon}/></label>}
-        <input type={props.type} id={props.id} placeholder={props.children}/>
+        <input type={props.type} id={props.id} placeholder={props.children} onChange={inputHandler}/>
         </>
         : props.type === "button"
         &&

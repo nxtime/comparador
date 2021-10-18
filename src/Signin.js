@@ -4,31 +4,50 @@ import loginAvatar from "./public/images/login-avatar.png";
 import { useHistory } from "react-router";
 
 const Signin = () => {
+  let users = [{
+    id: 0,
+    name: "admin",
+    pw: "1234",
+    email: "admin@email.com"
+  }]
+  let newUser = {};
+  const newUserReg = (user) =>{
+    newUser[user.id] = user.value;
+    // console.log(newUser);
+  }
+
+  const newReg = (e) => {
+    users.push(newUser);
+    homePageHandler();
+    console.log(users);
+  }
+
   const history = useHistory();
-  const clickHandler = () => {
+
+  const homePageHandler = () => {
     history.push('/');
   }
   return (
     <div className="container">
       <div className="container-flex">
         <div className="card">
-          <Input id="name" type="type" icon="bx:bxs-user">
+          <Input registration={newUserReg} id="name" type="text" icon="bx:bxs-user">
             Nome completo
           </Input>
-          <Input id="pw"type="type" icon="fa-solid:lock">
+          <Input registration={newUserReg} id="pw"type="password" icon="fa-solid:lock">
             Senha
           </Input>
-          <Input id="cpw"type="type" icon="fa-solid:lock">
+          <Input registration={newUserReg} id="cpw"type="password" icon="fa-solid:lock">
             Confirmar senha
           </Input>
-          <Input id="email" type="type" icon="mdi:email">
+          <Input registration={newUserReg} id="email" type="email" icon="mdi:email">
             Email
           </Input>
-          <Input type="button" id="Enviar">
+          <Input type="button" id="Enviar" clickHandler={newReg}>
             Enviar
           </Input>
           <p>
-            Já tem uma conta? <em onClick={clickHandler}>Logar</em>
+            Já tem uma conta? <em onClick={homePageHandler}>Logar</em>
           </p>
         </div>
         <span></span>

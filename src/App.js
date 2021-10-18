@@ -1,17 +1,18 @@
 import React from "react";
-import Input from "./components/Input";
+import "./App.css";
+import Home from "./Home";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Signin from "./Signin";
 
 function App() {
   return (
     <div className="App">
-      <div className="header">
-
-      </div>
-      <div className="image">
-
-      </div>
-      <Input type="button" icon="mdi:email">Logar com email</Input>
-      <Input type="button" icon="brandico:facebook-rect">Logar com facebook</Input>
+      <Router>
+      <Switch>
+        <Route exact path="/" component={Home}></Route>
+        <Route exact path="/signin" component={Signin}></Route>
+      </Switch>
+      </Router>
     </div>
   );
 }

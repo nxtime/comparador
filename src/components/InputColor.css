@@ -1,0 +1,10 @@
+.bg-secondary {
+    box-shadow: 0px .45em 0px var(--secondary);
+    background-color: var(--primary);
+}
+.bg-secondary:hover, .bg-secondary:focus-within {
+    background-color: var(--primary);
+    color: var(--secondary);
+    cursor: pointer;
+    box-shadow: 0px 0em 0px var(--primary);
+}

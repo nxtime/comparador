@@ -26,6 +26,34 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home></Home>
+            <h1
+              className="usuarios"
+              style={{
+                textAlign: "center",
+                color: "#effefe",
+              }}
+            >
+              Usuários Cadastrados:
+            </h1>
+            <div className="users" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", maxWidth: "800px", width: "80%", margin: "auto" }}>
+              {users.map((e) => {
+                return (
+                  <h2
+                    style={{
+                      textAlign: "center",
+                      color: "#defefe",
+                      backgroundColor: "var(--primary)",
+                      // width: "fit-content",
+                      margin: "10px",
+                      padding: ".75rem 1.25rem",
+                      borderRadius: "50px",
+                    }}
+                  >
+                    {e.name}
+                  </h2>
+                );
+              })}
+            </div>
           </Route>
           <Route exact path="/signin">
             <Signin users={users} addUser={addUser}></Signin>

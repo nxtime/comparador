@@ -37,8 +37,14 @@ html {
 .image > img {
     max-height: 25vh;
     opacity: .5;
+    transition: all ease .5s;
 }
-
+.image > img:hover {
+    max-height: 27.5vh;
+}
+.usuarios {
+    margin-top: 0;
+}
 .card > p {
     font-size: 14pt;
     color: var(--text-color);
@@ -46,7 +52,9 @@ html {
 }
 .card > p > em {
     text-decoration: none;
-    color: var(--secondary);    
+    color: var(--secondary);
+    cursor: pointer;
+    font-style: normal;
 }
 @media (min-width: 800px) {
     .container {
@@ -80,5 +88,8 @@ html {
     .header #title {
         color: var(--primary);
         padding: 0;
+    }
+    .usuarios {
+        margin-top: -2.5em;
     }
 }

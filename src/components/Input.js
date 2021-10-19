@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import './Input.css';
 import { Icon } from "@iconify/react"
 import { useHistory } from 'react-router-dom';
 
 const Input = (props) => {
-    const [inputValue, setInputValue] = useState();
+    let userInputValue = {
+        id: props.id,
+        value: ""
+    };
+
     const history = useHistory();
 
     const inputHandler = (e) => {
-        e.persist();
-        setInputValue(e.target.value, (prevInput) => {
-            return {...prevInput, }
-        });
-        console.log(inputValue);
+        userInputValue.value = e.target.value;
+        props.registration(userInputValue);
     }
     
       const homeHandler = (e) => {

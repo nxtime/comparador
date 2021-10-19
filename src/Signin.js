@@ -3,23 +3,21 @@ import Input from "./components/Input";
 import loginAvatar from "./public/images/login-avatar.png";
 import { useHistory } from "react-router";
 
-const Signin = () => {
-  let users = [{
-    id: 0,
-    name: "admin",
-    pw: "1234",
-    email: "admin@email.com"
-  }]
+const Signin = (props) => {
+  let users = props.users;
   let newUser = {};
+
   const newUserReg = (user) =>{
-    newUser[user.id] = user.value;
-    // console.log(newUser);
+    newUser = {
+      id: users.length,
+      ...newUser,
+      [user.id]: user.value
+    }
   }
 
-  const newReg = (e) => {
-    users.push(newUser);
+  const newReg = () => {
+    props.addUser(newUser);
     homePageHandler();
-    console.log(users);
   }
 
   const history = useHistory();

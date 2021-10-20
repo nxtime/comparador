@@ -8,7 +8,9 @@ function App() {
   let [users, setUsers] = useState([
     {
       id: 0,
+      key: Math.random()*0.821,
       name: "admin",
+      singleName: "admin",
       pw: "1234",
       email: "admin@email.com",
     },
@@ -49,7 +51,7 @@ function App() {
                       borderRadius: "50px",
                     }}
                   >
-                    {e.name}
+                    {e.singleName}
                   </h2>
                 );
               })}

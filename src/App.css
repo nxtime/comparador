@@ -37,7 +37,7 @@ html {
 .image > img {
     max-height: 25vh;
     opacity: .5;
-    transition: all ease .5s;
+    transition: all .5s cubic-bezier(.47,1.64,.41,.8);
 }
 .image > img:hover {
     max-height: 27.5vh;

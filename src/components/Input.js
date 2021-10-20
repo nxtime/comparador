@@ -2,7 +2,7 @@ import React from "react";
 import "./Input.css";
 import { Icon } from "@iconify/react";
 import { useHistory } from "react-router-dom";
-
+ 
 const Input = (props) => {
   let userInputValue = {
     id: props.id,
@@ -19,7 +19,7 @@ const Input = (props) => {
   const homeHandler = (e) => {
     if (props.id === "email") console.log("Logar email?");
     if (props.id === "facebook") console.log("Logar facebook?");
-    if (props.id === "Enviar") {
+    if (props.id === "Enviar" || props.id === "ok") {
       props.clickHandler();
     }
   };
@@ -36,12 +36,13 @@ const Input = (props) => {
               <Icon icon={props.icon} />
             </label>
           )}
-
           <input
+            autoComplete="off"
             type={props.type}
             id={props.id}
             placeholder={props.children}
             onChange={inputHandler}
+            maxLength="18"
           />
         </div>
       );

@@ -1,0 +1,37 @@
+.popup {
+    width: 100%;
+    position: absolute;
+    min-height: 100vh;
+    height: 100%;
+    background-color: #00000020;
+    z-index: 999;
+}
+.popup-card {
+    background-color: var(--text-color);
+    width: 80%;
+    margin: 1em auto 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3em 1.5em 1.5em;
+    border-radius: 50px;
+}
+.popup-card > .bg {
+    width: 50%;
+    min-width: 8ch;
+}
+.popup-card > .bg > input {
+    width: 8ch;
+    text-indent: 0;
+}
+.popup-card > p {
+    font-size: 16pt;
+    color: var(--primary); 
+}
+
+@media (min-width: 800px) {
+    .popup-card {
+        width: 25%;
+    }
+}

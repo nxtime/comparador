@@ -62,14 +62,14 @@ a {
   color: var(--text-color);
   text-align: center;
 }
-.card > p em {
+.card > p > a > em {
   text-decoration: none;
   position: relative;
   color: var(--secondary);
   cursor: pointer;
   font-style: normal;
 }
-.card > p em::before {
+.card > p > a > em::before {
   content: "";
   position: absolute;
   bottom: -2px;
@@ -80,7 +80,7 @@ a {
   background-color: var(--primary);
   transition: width 1s cubic-bezier(0.25, 1, 0.5, 1);
 }
-.card > p em:hover::before {
+.card > p > a > em:hover::before {
   left: 0;
   right: auto;
   width: 100%;

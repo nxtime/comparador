@@ -5,9 +5,8 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import Popup from "./components/UI/Popup";
 import { motion, AnimatePresence } from "framer-motion";
-import "./Signin.css";
 
-const Signin = (props) => {
+const Signin = ({ users }) => {
   const variants = {
     hidden: {
       x: -400,
@@ -18,13 +17,10 @@ const Signin = (props) => {
       opacity: 1,
     },
   };
-  let users = props.users;
-  let [newUser, setNewUser] = useState({
-    name: "",
-    singleName: "",
-    pw: "",
-    cpw: "",
+
+  let [userInput, setUserInput] = useState({
     email: "",
+    pw: "",
   });
 
   const transition = {
@@ -36,46 +32,52 @@ const Signin = (props) => {
 
   let [isPopup, setIsPopup] = useState({ state: false, popupText: "" });
 
-  const newUserReg = (user) => {
-    setNewUser({
+  const newUserInput = (user) => {
+    setUserInput({
       id: users.length,
-      ...newUser,
+      ...userInput,
       [user.id]: user.value,
     });
   };
 
-  const newReg = () => {
-    if (newUser.pw !== newUser.cpw) {
+  const findLogin = () => {
+    if (userInput.email === "" || userInput.pw === "") { // Checar se o input está vazio
       setIsPopup((prevValue) => {
-        return { ...prevValue, state: true, popupText: "Senhas não coincidem" };
+        return {
+          ...prevValue,
+          state: true,
+          popupText: "Preencha todos os campos",
+        };
       });
     } else {
-      const spaceIndex = newUser.name.trim().indexOf(" ");
-      newUser.email = newUser.email.trim().toLowerCase();
-      let formattedName = newUser.name.trim().toLowerCase();
-      formattedName =
-        formattedName.charAt(0).toUpperCase() + formattedName.slice(1);
-      newUser.name = formattedName;
-
-      if (spaceIndex !== -1) {
-        formattedName = formattedName.slice(0, spaceIndex);
-      }
-      newUser = {
-        ...newUser,
-        key: Math.random() * 0.821,
-        singleName: formattedName,
-      };
-      if (newUser.name === "" || newUser.email === "" || newUser.pw === "") {
-        setIsPopup((prevValue) => {
+      userInput.email = userInput.email.trim().toLowerCase();
+      let findUser = users.filter((e) => e.email === userInput.email); // Checar se tem o email na db
+      if (findUser.length !== 0) {
+        if (findUser[0].pw === userInput.pw) { // Checar se a senha coincide com a db
+          setIsPopup((prevValue) => { // Define valores do popup
+            return {
+              ...prevValue,
+              state: true,
+              popupText: "Login com sucesso",
+            };
+          });
+        } else {
+          setIsPopup((prevValue) => { // Define valores do popup
+            return {
+              ...prevValue,
+              state: true,
+              popupText: "Senha incorreta",
+            };
+          });
+        }
+      } else {
+        setIsPopup((prevValue) => { // Define valores do popup
           return {
             ...prevValue,
             state: true,
-            popupText: "Preencha todos os campos",
+            popupText: "Email não encontrado",
           };
         });
-      } else {
-        props.addUser(newUser);
-        homePageHandler();
       }
     }
   };
@@ -107,7 +109,7 @@ const Signin = (props) => {
         <motion.div
           className="container-flex"
           animate={{
-            height: ["256px", "500px"],
+            height: ["256px", "360px"],
           }}
           exit={{
             height: "256px",
@@ -126,15 +128,15 @@ const Signin = (props) => {
               }}
             >
               <Input
-                registration={newUserReg}
-                id="name"
-                type="text"
-                icon="bx:bxs-user"
+                registration={newUserInput}
+                id="email"
+                type="email"
+                icon="mdi:email"
                 variants={variants}
                 initial="hidden"
                 animate="visible"
               >
-                Nome completo
+                Email
               </Input>
             </motion.div>
             <motion.div
@@ -148,7 +150,7 @@ const Signin = (props) => {
               }}
             >
               <Input
-                registration={newUserReg}
+                registration={newUserInput}
                 id="pw"
                 type="password"
                 icon="fa-solid:lock"
@@ -167,76 +169,26 @@ const Signin = (props) => {
               }}
             >
               <Input
-                registration={newUserReg}
-                id="cpw"
-                type="password"
-                icon="fa-solid:lock"
-                variants={variants}
-                initial="hidden"
-                animate="visible"
-                duration={{ ...transition, delay: 0.5 }}
-                whileHover={{
-                  x: 20,
-                  transition: { ...transition },
-                }}
-              >
-                Confirmar senha
-              </Input>
-            </motion.div>
-
-            <motion.div
-              variants={variants}
-              initial="hidden"
-              animate="visible"
-              transition={{ ...transition, delay: 0.625 }}
-              whileHover={{
-                x: 20,
-                transition: { ...transition },
-              }}
-            >
-              <Input
-                registration={newUserReg}
-                id="email"
-                type="email"
-                icon="mdi:email"
-                variants={variants}
-                initial="hidden"
-                animate="visible"
-              >
-                Email
-              </Input>
-            </motion.div>
-            <motion.div
-              variants={variants}
-              initial="hidden"
-              animate="visible"
-              transition={{ ...transition, delay: 0.75 }}
-              whileHover={{
-                x: 20,
-                transition: { ...transition },
-              }}
-            >
-              <Input
                 type="button"
                 id="Enviar"
-                clickHandler={newReg}
+                clickHandler={findLogin}
                 variants={variants}
                 initial="hidden"
                 animate="visible"
               >
-                Enviar
+                Logar
               </Input>
             </motion.div>
             <p>
-              Já tem uma conta?
+              Quer tentar com outra conta?
               <Link to={`/`}>
-                <em>Logar</em>
+                <em>Voltar</em>
               </Link>
             </p>
           </div>
           <motion.span
             animate={{
-              height: window.innerWidth > 800 ? ["16rem", "32rem"] : 0,
+              height: window.innerWidth > 800 ? ["16rem", "24rem"] : 0,
             }}
             transition={{ ...transition, damping: 10, stiffness: 100 }}
           ></motion.span>

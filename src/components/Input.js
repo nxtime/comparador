@@ -17,9 +17,12 @@ const Input = (props) => {
   };
 
   const homeHandler = (e) => {
-    if (props.id === "email") console.log("Logar email?");
+    if (props.id === "email") history.push("/login");
     if (props.id === "facebook") console.log("Logar facebook?");
     if (props.id === "Enviar" || props.id === "ok") {
+      props.clickHandler();
+    }
+    if (props.id === "Logar") {
       props.clickHandler();
     }
   };

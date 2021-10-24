@@ -3,6 +3,7 @@ import "./App.css";
 import Home from "./Home";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Signin from "./Signin";
+import Login from "./Login"
 import { motion, AnimatePresence } from "framer-motion";
 
 function App() {
@@ -70,6 +71,9 @@ function App() {
           </Route>
           <Route exact path="/signin">
             <Signin users={users} addUser={addUser}></Signin>
+          </Route>
+          <Route exact path="/login">
+            <Login users={users}></Login>
           </Route>
         </Switch>
       </AnimatePresence>

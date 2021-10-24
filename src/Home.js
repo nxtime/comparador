@@ -26,7 +26,7 @@ const Home = () => {
 
   const history = useHistory();
   const clickHandler = () => {
-    history.push("/signin");
+    history.push("/login");
   };
   return (
     <motion.div
@@ -35,7 +35,6 @@ const Home = () => {
         opacity: 0,
       }}
     >
-      {console.log(window.innerWidth)}
       <motion.div
         className="container-flex"
         animate={{

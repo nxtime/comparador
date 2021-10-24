@@ -3,12 +3,13 @@ import "./App.css";
 import Home from "./Home";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Signin from "./Signin";
+import { motion, AnimatePresence } from "framer-motion";
 
 function App() {
   let [users, setUsers] = useState([
     {
       id: 0,
-      key: Math.random()*0.821,
+      key: Math.random() * 0.821,
       name: "admin",
       singleName: "admin",
       pw: "1234",
@@ -23,8 +24,8 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Router>
+    <Router>
+      <AnimatePresence initial={true} exitBeforeEnter>
         <Switch>
           <Route exact path="/">
             <Home></Home>
@@ -37,7 +38,17 @@ function App() {
             >
               Usuários Cadastrados:
             </h1>
-            <div className="users" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", maxWidth: "800px", width: "80%", margin: "auto" }}>
+            <div
+              className="users"
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                maxWidth: "800px",
+                width: "80%",
+                margin: "auto",
+              }}
+            >
               {users.map((e) => {
                 return (
                   <h2
@@ -61,8 +72,8 @@ function App() {
             <Signin users={users} addUser={addUser}></Signin>
           </Route>
         </Switch>
-      </Router>
-    </div>
+      </AnimatePresence>
+    </Router>
   );
 }
 

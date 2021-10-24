@@ -10,7 +10,7 @@
     padding: 0 1em;
     border-radius: 50px;
     box-shadow: 0px .45em 0px var(--primary);
-    transition: all .5s cubic-bezier(.47,1.64,.41,.8);
+    transition: all .4s cubic-bezier(.24,-0.06,.76,1.06);
 }
 .bg:hover,
 .bg:focus-within,
@@ -55,6 +55,7 @@ input:focus input::placeholder {
     margin: 4px auto 0;
     height: 2rem;
     width: 2rem;
+    cursor: pointer;
 }
 .bg > p {
     width: 100%;
@@ -74,7 +75,7 @@ input:focus input::placeholder {
     box-shadow: 0px .45em 0px var(--secondary);
     color: var(--secondary);
     background-color: var(--primary);
-    transition: all cubic-bezier(.47,1.64,.41,.8) .5s;
+    transition: all .4s cubic-bezier(.24,-0.06,.76,1.06);
 }
 .bg-secondary:hover,
 .bg-secondary:focus-within,

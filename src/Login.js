@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 import Popup from "./components/UI/Popup";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Signin = ({ users }) => {
+const Signin = ({ users, loggedIn }) => {
+  
+
   const variants = {
     hidden: {
       x: -400,
@@ -61,6 +63,8 @@ const Signin = ({ users }) => {
               popupText: "Login com sucesso",
             };
           });
+            loggedIn({state: true, user: findUser});
+          homePageHandler();
         } else {
           setIsPopup((prevValue) => { // Define valores do popup
             return {

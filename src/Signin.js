@@ -8,6 +8,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import "./Signin.css";
 
 const Signin = (props) => {
+  // if(props.containerSize.edited === false) {
+  //   props.updateContainerSize({height: "500px", edited: true})
+  // }
+
   const variants = {
     hidden: {
       x: -400,
@@ -74,6 +78,14 @@ const Signin = (props) => {
           };
         });
       } else {
+        setIsPopup((prevValue) => {
+          return {
+            ...prevValue,
+            state: true,
+            popupText: "Usuário criado com sucesso",
+            criarUsuario: true,
+          };
+        });
         props.addUser(newUser);
         homePageHandler();
       }
@@ -98,7 +110,7 @@ const Signin = (props) => {
         )}
       </AnimatePresence>
       <motion.div
-        className="container"
+        className="container signin"
         exit={{
           opacity: 0,
         }}
@@ -130,13 +142,21 @@ const Signin = (props) => {
                 id="name"
                 type="text"
                 icon="bx:bxs-user"
-                variants={variants}
-                initial="hidden"
-                animate="visible"
               >
                 Nome completo
               </Input>
             </motion.div>
+            {newUser.name.length === 24 && (
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  margin: "-20px auto",
+                }}
+              >
+                Você só pode digitar até 24 carácteres
+              </p>
+            )}
             <motion.div
               variants={variants}
               initial="hidden"
@@ -156,6 +176,40 @@ const Signin = (props) => {
                 Senha
               </Input>
             </motion.div>
+            {newUser.pw.includes(" ") ? (
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  margin: "-20px auto",
+                }}
+              >
+                Não use espaço na sua senha
+              </p>
+            ) : (
+              newUser.pw.length >= 4 && newUser.pw.length < 8 ? (
+                <p
+                  style={{
+                    textAlign: "center",
+                    fontSize: "10pt",
+                    margin: "-20px auto",
+                  }}
+                >
+                  Senha deve ter 8 carácteres
+                </p>
+              ) :       
+              newUser.pw.length >= 4 && newUser.pw !== newUser.cpw && (
+                <p
+                  style={{
+                    textAlign: "center",
+                    fontSize: "10pt",
+                    margin: "-20px auto",
+                  }}
+                >
+                  Senhas não coincidem
+                </p>
+              )
+            )}
             <motion.div
               variants={variants}
               initial="hidden"
@@ -171,14 +225,6 @@ const Signin = (props) => {
                 id="cpw"
                 type="password"
                 icon="fa-solid:lock"
-                variants={variants}
-                initial="hidden"
-                animate="visible"
-                duration={{ ...transition, delay: 0.5 }}
-                whileHover={{
-                  x: 20,
-                  transition: { ...transition },
-                }}
               >
                 Confirmar senha
               </Input>
@@ -199,13 +245,22 @@ const Signin = (props) => {
                 id="email"
                 type="email"
                 icon="mdi:email"
-                variants={variants}
-                initial="hidden"
-                animate="visible"
               >
                 Email
               </Input>
             </motion.div>
+
+            {newUser.email.length > 5 && !newUser.email.includes("@") && (
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  margin: "-20px auto",
+                }}
+              >
+                Digite um email valido
+              </p>
+            )}
             <motion.div
               variants={variants}
               initial="hidden"
@@ -221,8 +276,6 @@ const Signin = (props) => {
                 id="Enviar"
                 clickHandler={newReg}
                 variants={variants}
-                initial="hidden"
-                animate="visible"
               >
                 Enviar
               </Input>
@@ -257,7 +310,6 @@ const Signin = (props) => {
                 stiffness: 200,
               }}
               id="title"
-              className="signin"
             >
               Pricing
             </motion.h1>

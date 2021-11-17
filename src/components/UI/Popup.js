@@ -17,11 +17,12 @@ const Popup = (props) => {
     <motion.div className="popup"
     animate={{
       backgroundColor: ["#00000000", "#00000040"],
-      transition: {...transition, duration: .5}
+      backdropFilter: ["blur(0rem)", "blur(.125rem)"],
+      transition: {...transition, duration: .25} 
     }}
     exit={{
       backgroundColor: "#00000000",
-      duration: 0.1
+      duration: 0
     }}>
       <motion.div
       initial={{
@@ -33,7 +34,7 @@ const Popup = (props) => {
         }}
         exit={{
           y: -250,
-          duration: .25
+          duration: .125
         }}
         transition={transition}
         className="popup-card"

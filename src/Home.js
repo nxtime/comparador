@@ -1,11 +1,12 @@
 import React from "react";
 import Input from "./components/Input";
 import loginAvatar from "./public/images/login-avatar.png";
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const Home = () => {
+const Home = (props) => {
+  
   const transition = {
     duration: 0.35,
     type: "spring",
@@ -24,10 +25,11 @@ const Home = () => {
     },
   };
 
-  const history = useHistory();
-  const clickHandler = () => {
-    history.push("/login");
-  };
+  // const history = useHistory();
+  // const clickHandler = () => {
+  //   history.push("/login");
+  // };
+
   return (
     <motion.div
       className="container"
